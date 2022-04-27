@@ -80,16 +80,13 @@ class SplashController extends BaseXController  {
   }
 
   setFingerprint(BuildContext context) async {
-    List<BiometricType> availableBiometrics = await LocalAuthentication.getAvailableBiometrics();
-    print('availableBiometrics ${availableBiometrics.toString()}');
-    // if (availableBiometrics.contains(BiometricType.face)) {
-    //   // Face ID.
-    // } else
-    if (availableBiometrics.contains(BiometricType.fingerprint)) {// 指纹.
+    bool canCheckBiometrics = await LocalAuthentication.canCheckBiometrics;
+    print('availableBiometrics ${canCheckBiometrics.toString()}');
+    if (canCheckBiometrics) {// 指纹.
       var result = await GetxUtils.showConfimDialog(context,Ids.set_gesture_password_hint.str());
       if(result??false){
         _updateFingerprintStatus(FINGERPRINT_STATUS_CHECK);
-        bool didAuthenticate = await LocalAuthentication.authenticate(localizedReason: Ids.set_gesture_password.str(), stickyAuth: false, useErrorDialogs: true,);
+        bool didAuthenticate = await LocalAuthentication.authenticate(localizedReason: Ids.set_gesture_password.str(),);
         if(didAuthenticate){
           SpUtil.putBool(Constant.SP_FINGERPRINT_PASSWORD, true);
           GetxUtils.offNamed(MainPage.routeName);
