@@ -59,7 +59,7 @@ class SplashController extends BaseXController  {
     _updateFingerprintStatus(FINGERPRINT_STATUS_CHECK);
     bool didAuthenticate = await LocalAuthentication.authenticate(localizedReason: Ids.check_fingerprint.str(),  useErrorDialogs: true,);
     if(didAuthenticate){
-      GetxUtils.pushNamed(MainPage.routeName);
+      GetxUtils.offNamed(MainPage.routeName);
     }else{
       _updateFingerprintStatus(FINGERPRINT_STATUS_ERROR);
     }

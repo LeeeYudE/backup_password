@@ -38,7 +38,7 @@ class MainPage extends BaseGetBuilder<MainController> {
       },),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Get.toNamed(CreatePswPage.routeName);
+          GetxUtils.pushNamed(CreatePswPage.routeName);
         },
         tooltip: 'create new password',
         child: const Icon(Icons.add),

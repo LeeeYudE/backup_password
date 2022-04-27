@@ -45,6 +45,7 @@ class AppPages {
         debugPrint('pageName=$name');
         return page!();
       },
+      popGesture:name == MainPage.routeName || name == '/'?false:true
     );
   }
 }
