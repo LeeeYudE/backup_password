@@ -68,18 +68,17 @@ jobs:
           name: apk
       - name: Display structure of downloaded files
         run: ls -R
-      - name: Checkout latest release tag
-        run: |
-          $LATEST_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
-          echo $LATEST_TAG
+      - name: Get version
+        id: get_version
+        run: echo ::set-output name=LAST_TAG::${GITHUB_REF/refs\/tags\//}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.1.4
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          tag_name: $LAST_TAG
-          release_name: $LAST_TAG
+          tag_name: ${{ steps.get_version.outputs.LAST_TAG }}
+          release_name: ${{ steps.get_version.outputs.LAST_TAG }}
       - name: Upload Release APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
