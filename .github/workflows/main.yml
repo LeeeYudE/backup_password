@@ -22,7 +22,7 @@ jobs:
           fetch-depth: 0
       - name: Checkout latest release tag
         run: |
-          tag_name=$(git describe --tags `git rev-list --tags --max-count=1`)
+          ${tag_name}=$(git describe --tags `git rev-list --tags --max-count=1`)
       - name: tag_name
         run: echo -e "tag_name = ${tag_name} ref_name = ${{github.ref_name}}"
 
