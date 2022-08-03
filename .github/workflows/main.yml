@@ -72,12 +72,13 @@ jobs:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.1.4
+        run: echo "LAST_TAG = $LAST_TAG !"
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           LAST_TAG : $(git describe --tags `git rev-list --tags --max-count=1`)
         with:
-          tag_name: ${LAST_TAG}
-          release_name: ${LAST_TAG}
+          tag_name: $LAST_TAG
+          release_name: $LAST_TAG
       - name: Upload Release APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
