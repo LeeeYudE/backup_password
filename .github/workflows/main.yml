@@ -72,7 +72,6 @@ jobs:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1.1.4
-        run: echo "LAST_TAG = $LAST_TAG !"
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
           LAST_TAG : $(git describe --tags `git rev-list --tags --max-count=1`)
