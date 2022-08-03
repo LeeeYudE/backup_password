@@ -40,8 +40,8 @@ jobs:
     needs: apk
     runs-on: ubuntu-latest
     steps:
-      - name: Find Latest Tag
-        uses: oprypin/find-latest-tag@v1.1.0
+      - name: Get Latest Tag
+        uses: WyriHaximus/github-action-get-previous-tag@v1
       - name: Download APK from build
         uses: actions/download-artifact@v2
         with:
@@ -55,8 +55,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          tag_name: ${{ steps.some_step_id.outputs.tag }}
-          release_name: ${{ steps.some_step_id.outputs.tag }}
+          tag_name: ${{ steps.previoustag.outputs.tag }}
+          release_name: ${{ steps.previoustag.outputs.tag }}
       - name: Upload Release APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
