@@ -8,7 +8,7 @@ on:
       - 'build'
 
 env:
-  tag_name : v1.0.2
+  LAST_TAG : v1.0.2
 
 jobs:
 
