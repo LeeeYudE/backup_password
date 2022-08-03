@@ -48,7 +48,7 @@ jobs:
           fetch-depth: 0
       - name: Get Latest Tag
         uses: WyriHaximus/github-action-get-previous-tag@v1
-        run : ${env.tag_name} = ${{ steps.previoustag.outputs.tag }}
+        run : ${tag_name} = ${{ steps.previoustag.outputs.tag }}
 
       - name: tag_name
         run: echo -e "tag_name = ${tag_name}"
@@ -65,8 +65,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
         with:
-          tag_name: ${env.tag_name}
-          release_name: ${env.tag_name}
+          tag_name: ${tag_name}
+          release_name: ${tag_name}
       - name: Upload Release APK
         id: upload_release_asset
         uses: actions/upload-release-asset@v1.0.1
