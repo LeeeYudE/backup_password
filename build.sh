@@ -2,6 +2,9 @@
 
 # 打包显示的日志
 
-git tag v1.0.2
-git commit --allow-empty -m "build 测试"
+_tag=v1.0.2
+
+git tag ${_tag}
+git push --tags
+git commit --allow-empty -m "[build] Release ${_tag}"
 git push origin $branchg
