@@ -40,16 +40,11 @@ jobs:
     needs: apk
     runs-on: ubuntu-latest
     steps:
-      - name: Get Previous tag
-        id: previoustag
+      - uses: actions/checkout@v2.2.0
+        with:
+          fetch-depth: 0
+      - name: Get Latest Tag
         uses: WyriHaximus/github-action-get-previous-tag@v1
-        with:
-          fallback: 1.0.0
-      - name: Get next minor version
-        id: semvers
-        uses: WyriHaximus/github-action-next-semvers@v1
-        with:
-          version: ${{ steps.previoustag.outputs.tag }}
       - name: Download APK from build
         uses: actions/download-artifact@v2
         with:
