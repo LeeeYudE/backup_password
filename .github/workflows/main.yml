@@ -9,32 +9,32 @@ on:
 
 jobs:
 
-#  apk:
-#    name: Generate APK
-#    if: contains(github.event.head_commit.message, '[build]')
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout
-#        uses: actions/checkout@v2
-#      - name: Setup JDK
-#        uses: actions/setup-java@v2
-#        with:
-#          distribution: 'zulu'
-#          java-version: 8
-#      - uses: subosito/flutter-action@v1
-#        with:
-#          flutter-version: '2.10.1'
-#      - uses: finnp/create-file-action@master
-#        env:
-#          FILE_NAME: lib/common/config/ignoreConfig.dart
-#          FILE_DATA: class NetConfig { static const CLIENT_ID = "${{ secrets.CLIENT_ID }}"; static const CLIENT_SECRET = "${{ secrets.CLIENT_SECRET }}";}
-#      - run: flutter pub get
-#      - run: flutter build apk --release --target-platform=android-arm64 --no-shrink
-#      - name: Upload APK
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: apk
-#          path: build/app/outputs/apk/release/app-release.apk
+  apk:
+    name: Generate APK
+    if: contains(github.event.head_commit.message, '[build]')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'zulu'
+          java-version: 8
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '2.10.1'
+      - uses: finnp/create-file-action@master
+        env:
+          FILE_NAME: lib/common/config/ignoreConfig.dart
+          FILE_DATA: class NetConfig { static const CLIENT_ID = "${{ secrets.CLIENT_ID }}"; static const CLIENT_SECRET = "${{ secrets.CLIENT_SECRET }}";}
+      - run: flutter pub get
+      - run: flutter build apk --release --target-platform=android-arm64 --no-shrink
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: apk
+          path: build/app/outputs/apk/release/app-release.apk
   release:
     name: Release APK
     needs: apk
