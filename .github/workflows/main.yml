@@ -8,7 +8,7 @@ on:
       - 'build'
 
 env:
-  tag_name : v.1.0.0
+  tag_name : v1.0.2
 
 jobs:
 
@@ -48,10 +48,10 @@ jobs:
           fetch-depth: 0
       - name: Get Latest Tag
         uses: WyriHaximus/github-action-get-previous-tag@v1
-        run : ${tag_name} = ${{ steps.previoustag.outputs.tag }}
+#        run : ${tag_name} = ${{ steps.previoustag.outputs.tag }}
 
       - name: tag_name
-        run: echo -e "tag_name = ${tag_name}"
+        run: echo -e "tag_name = ${tag_name} ref_name = ${{github.ref_name}}"
       - name: Download APK from build
         uses: actions/download-artifact@v2
         with:
